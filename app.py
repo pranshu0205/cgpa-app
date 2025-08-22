@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="CGPA Calculator", layout="wide")
+st.set_page_config(page_title="IITM BS CGPA Calculator", layout="wide")
 st.title("🎓 Year-wise CGPA Calculator")
 
 # Grade mapping
@@ -54,7 +54,7 @@ YEARS = {
     "BS (Year 4)": BS
 }
 
-st.markdown("Select grades for each subject. Credits are fixed.")
+st.markdown("Select grades for each subject. Credits are fixed as per IITM Website.")
 
 # Grade options (default blank)
 grade_options = [""] + list(GRADE_POINTS.keys())
@@ -108,7 +108,7 @@ for year_name, courses in YEARS.items():
     st.markdown(f"**Cumulative CGPA up to {year_name}: {year_cgpa}**")
 
 # Final summary
-st.subheader("📊 Year-wise CGPA Summary")
+st.subheader("📊 Year-wise CGPA Summary! Remember: Skills matter more than credits.")
 st.table({
     "Year": list(year_cgpas.keys()),
     "Cumulative CGPA": list(year_cgpas.values())
