@@ -5,7 +5,15 @@ st.set_page_config(page_title="IITM BS CGPA Calculator", layout="wide")
 st.title("🎓 Year-wise CGPA Calculator")
 
 # Custom CSS for background + styling
-
+st.markdown(
+    """
+    <hr style="margin-top:50px; margin-bottom:10px;">
+    <div style="text-align:center; color:black; font-size:14px;">
+        Created by <b>22f2001312 (Pranshu)</b>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 # Grade mapping
 GRADE_POINTS = {
     "S": 10, "A": 9, "B": 8, "C": 7,
