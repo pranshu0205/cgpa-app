@@ -5,40 +5,6 @@ st.set_page_config(page_title="IITM BS CGPA Calculator", layout="wide")
 st.title("🎓 Year-wise CGPA Calculator")
 
 # Custom CSS for background + styling
-st.markdown(
-    """
-    <style>
-    /* Background */
-    .stApp {
-        background-color: #ffffff;
-        background-image: url("https://www.transparenttextures.com/patterns/marble.png");
-        background-attachment: fixed;
-        color: black; /* Default text color */
-    }
-
-    /* Title styling */
-    h1, h2, h3, h4, h5, h6, p, span, div {
-        color: black !important;
-    }
-
-    /* Table text */
-    .stDataFrame, .stTable {
-        color: black !important;
-    }
-
-    /* Markdown text */
-    .stMarkdown {
-        color: black !important;
-    }
-
-    /* Labels for selectboxes etc. */
-    label, .css-10trblm, .css-1kyxreq {
-        color: black !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Grade mapping
 GRADE_POINTS = {
