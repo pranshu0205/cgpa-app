@@ -13,12 +13,27 @@ st.markdown(
         background-color: #ffffff;
         background-image: url("https://www.transparenttextures.com/patterns/marble.png");
         background-attachment: fixed;
+        color: black; /* Default text color */
     }
+
     /* Title styling */
-    h1 {
-        color: #2E4053;
-        text-align: center;
-        font-weight: bold;
+    h1, h2, h3, h4, h5, h6, p, span, div {
+        color: black !important;
+    }
+
+    /* Table text */
+    .stDataFrame, .stTable {
+        color: black !important;
+    }
+
+    /* Markdown text */
+    .stMarkdown {
+        color: black !important;
+    }
+
+    /* Labels for selectboxes etc. */
+    label, .css-10trblm, .css-1kyxreq {
+        color: black !important;
     }
     </style>
     """,
