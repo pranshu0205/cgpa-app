@@ -13,7 +13,7 @@ st.markdown(
         bottom: 0;
         width: 100%;
         text-align: center;
-        color: black;
+        color: white;
         font-size: 14px;
         padding: 10px;
         background-color: none;
