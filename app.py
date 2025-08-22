@@ -4,6 +4,27 @@ import pandas as pd
 st.set_page_config(page_title="IITM BS CGPA Calculator", layout="wide")
 st.title("🎓 Year-wise CGPA Calculator")
 
+# Custom CSS for background + styling
+st.markdown(
+    """
+    <style>
+    /* Background */
+    .stApp {
+        background-color: #ffffff;
+        background-image: url("https://www.transparenttextures.com/patterns/marble.png");
+        background-attachment: fixed;
+    }
+    /* Title styling */
+    h1 {
+        color: #2E4053;
+        text-align: center;
+        font-weight: bold;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Grade mapping
 GRADE_POINTS = {
     "S": 10, "A": 9, "B": 8, "C": 7,
@@ -62,50 +83,48 @@ grade_options = [""] + list(GRADE_POINTS.keys())
 all_results = []
 total_points = 0
 total_credits = 0
-
 year_cgpas = {}
 
-# Loop over years
+# Loop over years with collapsible expanders
 for year_name, courses in YEARS.items():
-    st.subheader(year_name)
+    with st.expander(year_name, expanded=False):
+        year_points = 0
+        year_credits = 0
+        year_rows = []
 
-    year_points = 0
-    year_credits = 0
-    year_rows = []
+        for subject, credits in courses:
+            grade = st.selectbox(
+                f"{subject} (Credits: {credits})",
+                options=grade_options,
+                index=0,
+                key=year_name + subject
+            )
 
-    for subject, credits in courses:
-        grade = st.selectbox(
-            f"{subject} (Credits: {credits})",
-            options=grade_options,
-            index=0,
-            key=year_name + subject
-        )
+            if grade == "":
+                gp = None
+                points = 0
+                den_credits = 0
+            else:
+                gp = GRADE_POINTS[grade]
+                include_in_den = (grade not in EXCLUDE_FROM_CGPA) or (grade in INCLUDE_ZERO_IN_DEN)
+                points = gp * credits if include_in_den else 0
+                den_credits = credits if include_in_den else 0
 
-        if grade == "":
-            gp = None
-            points = 0
-            den_credits = 0
-        else:
-            gp = GRADE_POINTS[grade]
-            include_in_den = (grade not in EXCLUDE_FROM_CGPA) or (grade in INCLUDE_ZERO_IN_DEN)
-            points = gp * credits if include_in_den else 0
-            den_credits = credits if include_in_den else 0
+                year_points += points
+                year_credits += den_credits
 
-            year_points += points
-            year_credits += den_credits
+            year_rows.append((subject, grade, credits, gp, points))
 
-        year_rows.append((subject, grade, credits, gp, points))
+        # Add this year's results to overall
+        total_points += year_points
+        total_credits += year_credits
 
-    # Add this year's results to overall
-    total_points += year_points
-    total_credits += year_credits
+        year_cgpa = round(total_points / total_credits, 2) if total_credits > 0 else 0.0
+        year_cgpas[year_name] = year_cgpa
 
-    year_cgpa = round(total_points / total_credits, 2) if total_credits > 0 else 0.0
-    year_cgpas[year_name] = year_cgpa
-
-    df = pd.DataFrame(year_rows, columns=["Subject", "Grade", "Credits", "Grade Point", "C × GP"])
-    st.dataframe(df, use_container_width=True)
-    st.markdown(f"**Cumulative CGPA up to {year_name}: {year_cgpa}**")
+        df = pd.DataFrame(year_rows, columns=["Subject", "Grade", "Credits", "Grade Point", "C × GP"])
+        st.dataframe(df, use_container_width=True)
+        st.markdown(f"**Cumulative CGPA up to {year_name}: {year_cgpa}**")
 
 # Final summary
 st.subheader("📊 Year-wise CGPA Summary! Remember: Skills matter more than credits.")
