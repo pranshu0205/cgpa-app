@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="IITM BS CGPA Calculator", layout="wide")
-st.title("🎓 Year-wise CGPA Calculator")
+st.title("🎓 IITM BS Level/Year-wise CGPA Calculator")
 
 # Custom CSS for background + styling
 st.markdown(
@@ -128,7 +128,7 @@ for year_name, courses in YEARS.items():
         st.markdown(f"**Cumulative CGPA up to {year_name}: {year_cgpa}**")
 
 # Final summary
-st.subheader("📊 Year-wise CGPA Summary! Remember: Skills matter more than credits.")
+st.subheader("📊 Year-wise CGPA Summary! Remember: Skills matter more than grades.")
 st.table({
     "Year": list(year_cgpas.keys()),
     "Cumulative CGPA": list(year_cgpas.values())
