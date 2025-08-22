@@ -16,7 +16,7 @@ st.markdown(
         color: black;
         font-size: 14px;
         padding: 10px;
-        background-color: #f9f9f9;
+        background-color: none;
     }
     </style>
     <div class="footer">
