@@ -7,13 +7,25 @@ st.title("🎓 Year-wise CGPA Calculator")
 # Custom CSS for background + styling
 st.markdown(
     """
-    <hr style="margin-top:50px; margin-bottom:10px;">
-    <div style="text-align:center; color:black; font-size:14px;">
+    <style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: black;
+        font-size: 14px;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+    </style>
+    <div class="footer">
         Created by <b>22f2001312 (Pranshu)</b>
     </div>
     """,
     unsafe_allow_html=True
 )
+
 # Grade mapping
 GRADE_POINTS = {
     "S": 10, "A": 9, "B": 8, "C": 7,
